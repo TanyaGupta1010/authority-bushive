@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #5D6A55;
+  background-color: #F7E2CC;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #F7E2CC; /* New button color */
+  color: #5D6A55;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #5D6A55;
+}
+
+@layer base {
+  :root {
+    --background: #F7E2CC;
+    --foreground: #5D6A55;
+    --navbar: #5D6A55; /* navbar new green shade */
+    --primary: #5D6A55;
+    --primary-foreground: #F7E2CC;
+    --secondary: #F7E2CC;
+    --secondary-foreground: #5D6A55;
+    --card: #ffffff;
+    --card-foreground: #5D6A55;
+  }
+
+  .dark {
+    --background: #5D6A55;
+    --foreground: #F7E2CC;
+    --navbar: #5D6A55;
+    --primary: #F7E2CC;
+    --primary-foreground: #5D6A55;
+    --secondary: #5D6A55;
+    --secondary-foreground: #F7E2CC;
+    --card: #5D6A55;
+    --card-foreground: #F7E2CC;
+  }
+}
+
+@layer components {
+  /* Force driver name box white */
+  .driver-name {
+    @apply bg-white text-[#5D6A55] px-2 py-1 rounded;
+  }
+}
