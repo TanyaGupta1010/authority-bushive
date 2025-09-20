@@ -26,13 +26,13 @@ export const DriverTable: React.FC<DriverTableProps> = ({
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <Table>
-            <TableHeader className="bg-slate-700">
+            <TableHeader className="bg-[#414A37]">
               <TableRow className="border-slate-600">
-                <TableHead className="text-slate-200 font-semibold">Driver Name</TableHead>
-                <TableHead className="text-slate-200 font-semibold">Driver ID</TableHead>
-                <TableHead className="text-slate-200 font-semibold">Bus Number</TableHead>
-                <TableHead className="text-slate-200 font-semibold">Status</TableHead>
-                <TableHead className="text-slate-200 font-semibold">Actions</TableHead>
+                <TableHead className="text-[#DBC2A6] font-semibold">Driver Name</TableHead>
+                <TableHead className="text-[#DBC2A6] font-semibold">Driver ID</TableHead>
+                <TableHead className="text-[#DBC2A6] font-semibold">Bus Number</TableHead>
+                <TableHead className="text-[#DBC2A6] font-semibold">Status</TableHead>
+                <TableHead className="text-[#DBC2A6] font-semibold">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
