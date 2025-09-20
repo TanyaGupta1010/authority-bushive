@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { PersonalInfoStep } from './PersonalInfoStep';
 import { AadhaarVerificationStep } from './AadhaarVerificationStep';
 import { PasswordStep } from './PasswordStep';
 import { SuccessStep } from './SuccessStep';
-import { RegistrationData } from '../../types';
+// import { RegistrationData } from '../types';
 
 interface DriverRegisterFlowProps {
   onComplete: () => void;
@@ -11,7 +11,7 @@ interface DriverRegisterFlowProps {
 }
 
 export const DriverRegisterFlow: React.FC<DriverRegisterFlowProps> = ({ onComplete, onCancel }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [step, setStep] = useState(1);
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
     fullName: '',
     phoneNumber: '',
@@ -19,65 +19,48 @@ export const DriverRegisterFlow: React.FC<DriverRegisterFlowProps> = ({ onComple
     password: '',
   });
 
-  const handleStepComplete = (data: Partial<RegistrationData>) => {
+  const handleNextPersonalInfo = (data: Partial<RegistrationData>) => {
     setRegistrationData(prev => ({ ...prev, ...data }));
-    
-    if (currentStep < 4) {
-      setCurrentStep(prev => prev + 1);
-    }
+    setStep(2);
   };
 
-  const generateDriverId = () => {
-    return Math.floor(1000 + Math.random() * 9000).toString();
-  };
+  const handleNextAadhaar = () => setStep(3);
 
-  const handleFinalSubmit = () => {
-    const driverId = generateDriverId();
-    setRegistrationData(prev => ({ ...prev, driverId }));
-    setCurrentStep(4);
-  };
+  const handleNextPassword = () => setStep(4);
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <PersonalInfoStep
-            onNext={handleStepComplete}
-            onCancel={onCancel}
-            initialData={registrationData}
-          />
-        );
-      case 2:
-        return (
-          <AadhaarVerificationStep
-            onNext={handleStepComplete}
-            onBack={() => setCurrentStep(1)}
-            aadhaarNumber={registrationData.aadhaarNumber}
-          />
-        );
-      case 3:
-        return (
-          <PasswordStep
-            onNext={handleFinalSubmit}
-            onBack={() => setCurrentStep(2)}
-          />
-        );
-      case 4:
-        return (
-          <SuccessStep
-            driverId={registrationData.driverId!}
-            driverName={registrationData.fullName}
-            onComplete={onComplete}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  // Here you can generate driver ID dynamically or fetch from backend
+  const driverId = 'DRV' + Math.floor(1000 + Math.random() * 9000);
+  const driverName = registrationData.fullName;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      {renderStep()}
+    <div className="w-full max-w-3xl mx-auto py-6 px-4">
+      {step === 1 && (
+        <PersonalInfoStep
+          onNext={handleNextPersonalInfo}
+          onCancel={onCancel}
+          initialData={registrationData}
+        />
+      )}
+      {step === 2 && (
+        <AadhaarVerificationStep
+          aadhaarNumber={registrationData.aadhaarNumber}
+          onNext={handleNextAadhaar}
+          onBack={() => setStep(1)}
+        />
+      )}
+      {step === 3 && (
+        <PasswordStep
+          onNext={handleNextPassword}
+          onBack={() => setStep(2)}
+        />
+      )}
+      {step === 4 && (
+        <SuccessStep
+          driverId={driverId}
+          driverName={driverName}
+          onComplete={onComplete}
+        />
+      )}
     </div>
   );
 };

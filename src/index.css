@@ -32,7 +32,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #F7E2CC; /* New button color */
+  /* background-color: #F7E2CC; New button color */
   color: #5D6A55;
   cursor: pointer;
   transition: border-color 0.25s;

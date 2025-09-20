@@ -62,12 +62,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
           <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#304159]">
             <User className="h-8 w-8 text-[#ece6e1]" />
           </div>
-          <CardTitle className="text-2xl font-bold text-gray-800">
-            Authority Login
-          </CardTitle>
-          <p className="text-sm text-gray-600">
-            Access the BusHive Authority Portal
-          </p>
+          <CardTitle className="text-2xl font-bold text-gray-800">Authority Login</CardTitle>
+          <p className="text-sm text-gray-600">Access the BusHive Authority Portal</p>
         </CardHeader>
 
         <CardContent className="p-6">
@@ -141,23 +137,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
                   Signing In...
                 </div>
               ) : (
-                <>
+                <div className="flex items-center justify-center">
                   <LogIn className="mr-2 h-4 w-4" />
                   Sign In
-                </>
+                </div>
               )}
             </Button>
           </form>
 
           {/* Signup Link */}
-          <div className="mt-6 text-center text-sm text-gray-600">
-            Don't have an account?{' '}
-            <button
-              onClick={onSwitchToSignup}
-              className="text-[#99744a] hover:text-[#99744a]/80 font-medium hover:underline"
-            >
-              Sign up here
-            </button>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{' '}
+              <button
+                onClick={onSwitchToSignup}
+                className="text-[#99744a] hover:text-[#99744a]/80 font-medium hover:underline"
+              >
+                Sign up here
+              </button>
+            </p>
           </div>
         </CardContent>
       </Card>
