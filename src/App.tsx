@@ -90,14 +90,14 @@ function App() {
           : driver
       )
     );
-    
+
     const driver = drivers.find(d => d.id === driverId);
-    const currentTime = new Date().toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const currentTime = new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit'
     });
-    
+
     toast.success(`${driver?.name} clocked in at ${currentTime}`, {
       description: 'Status updated to On Duty',
     });
@@ -111,14 +111,14 @@ function App() {
           : driver
       )
     );
-    
+
     const driver = drivers.find(d => d.id === driverId);
-    const currentTime = new Date().toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    const currentTime = new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit'
     });
-    
+
     toast.success(`${driver?.name} clocked out at ${currentTime}`, {
       description: 'Status updated to Off Duty',
     });
@@ -132,7 +132,7 @@ function App() {
   };
 
   const selectedDriver = useMemo(() => {
-    return appState.selectedDriverId 
+    return appState.selectedDriverId
       ? drivers.find(d => d.id === appState.selectedDriverId)
       : undefined;
   }, [drivers, appState.selectedDriverId]);
@@ -150,39 +150,39 @@ function App() {
     <div className="min-h-screen bg-white">
       {/* Show navbar only for authenticated pages */}
       {appState.isAuthenticated && (
-        <Navbar 
-          title={getCurrentPageTitle()} 
+        <Navbar
+          title={getCurrentPageTitle()}
           onDriverRegister={handleDriverRegister}
           showDriverRegister={appState.currentPage === 'dashboard' || appState.currentPage === 'profile'}
         />
       )}
-      
+
       {/* Main Content */}
       {appState.currentPage === 'welcome' && (
         <WelcomePage onGetStarted={handleGetStarted} />
       )}
-      
+
       {appState.currentPage === 'login' && (
-        <LoginPage 
-          onLogin={handleLogin} 
+        <LoginPage
+          onLogin={handleLogin}
           onSwitchToSignup={handleSwitchToSignup}
         />
       )}
-      
+
       {appState.currentPage === 'signup' && (
-        <SignupPage 
-          onSignup={handleLogin} 
+        <SignupPage
+          onSignup={handleLogin}
           onSwitchToLogin={handleSwitchToLogin}
         />
       )}
-      
+
       {appState.currentPage === 'driver-register' && (
         <DriverRegisterFlow
           onComplete={handleDriverRegisterComplete}
           onCancel={handleDriverRegisterCancel}
         />
       )}
-      
+
       {appState.isAuthenticated && (
         <main className="p-6 bg-slate-50 min-h-screen">
           {appState.currentPage === 'dashboard' && (
@@ -195,15 +195,19 @@ function App() {
               onClockOut={handleClockOut}
             />
           )}
-          
+
           {appState.currentPage === 'profile' && selectedDriver && (
             <div className="space-y-4">
               <button
-                onClick={() => setAppState({ ...appState, currentPage: 'dashboard', selectedDriverId: undefined })}
-                className="text-orange-600 hover:text-orange-700 font-medium hover:underline flex items-center"
-              >
-                ← Back to Dashboard
-              </button>
+  onClick={() =>
+    setAppState({ ...appState, currentPage: 'dashboard', selectedDriverId: undefined })
+  }
+  className="text-[#304159] hover:text-[#99744a] font-medium flex items-center gap-1 cursor-pointer bg-transparent border-none p-0"
+  style={{ background: "transparent" }}
+>
+  ← <span>Back to Dashboard</span>
+</button>
+
               <DriverProfile
                 driver={selectedDriver}
                 attendanceRecords={driverAttendanceRecords}
@@ -214,7 +218,7 @@ function App() {
           )}
         </main>
       )}
-      
+
       <Toaster position="top-right" richColors />
     </div>
   );
