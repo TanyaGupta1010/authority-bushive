@@ -60,7 +60,7 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onSwitchToLogi
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md border border-gray-200 shadow-lg">
         <CardHeader className="text-center pb-4">
-          <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#414a37]">
+          <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#304159]">
             <User className="h-8 w-8 text-[#ece6e1]" />
           </div>
           <CardTitle className="text-2xl font-bold text-gray-800">

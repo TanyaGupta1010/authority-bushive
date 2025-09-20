@@ -38,7 +38,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <Card className="w-full max-w-md border border-gray-200 shadow-lg">
         <CardHeader className="text-center pb-4">
-          <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#414a37]">
+          <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#304159]">
             <User className="h-8 w-8 text-[#ece6e1]" />
           </div>
           <CardTitle className="text-2xl font-bold text-gray-800">
@@ -112,11 +112,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#ece6e1] hover:bg-[#ece6e1]/90 text-[#414a37] py-2.5 font-medium"
+              className="w-full bg-[#ece6e1] hover:bg-[#ece6e1]/90 text-[#304159] py-2.5 font-medium"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#414a37] mr-2"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#304159] mr-2"></div>
                   Signing In...
                 </div>
               ) : (
