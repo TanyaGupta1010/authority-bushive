@@ -20,11 +20,11 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
 }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', { 
-      weekday: 'short', 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-IN', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     });
   };
 
@@ -45,15 +45,15 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
     <div className="space-y-6">
       {/* Driver Information Card */}
       <Card className="border border-slate-200">
-        <CardHeader className="bg-slate-50 border-b border-slate-200">
-          <CardTitle className="flex items-center gap-3 text-slate-800">
+        <CardHeader className="border-b border-slate-200" style={{ backgroundColor: '#ece6e1' }}>
+          <CardTitle className="flex items-center gap-3 text-slate-800 text-3xl font-bold">
             <div className="bg-blue-100 p-2 rounded-full">
               <User className="h-5 w-5 text-blue-600" />
             </div>
             Driver Profile
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-6">
+        <CardContent className="p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Basic Information */}
             <div className="space-y-4">
@@ -76,7 +76,7 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <div className="flex items-center space-x-3">
                   <Phone className="h-4 w-4 text-slate-500" />
@@ -108,14 +108,14 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
                   {driver.currentStatus}
                 </Badge>
               </div>
-              
+
               <div>
                 <h4 className="text-sm font-semibold text-slate-600 mb-3">Quick Actions</h4>
                 <div className="flex space-x-3">
                   <Button
                     onClick={() => onClockIn(driver.id)}
                     disabled={driver.currentStatus === 'On Duty'}
-                    className="bg-green-600 hover:bg-green-700 disabled:opacity-50"
+                    className="bg-green-100 text-green-800 border border-green-200 hover:bg-green-200 disabled:opacity-50"
                   >
                     <Clock className="mr-2 h-4 w-4" />
                     Clock In
@@ -138,10 +138,11 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
 
       {/* Attendance History Card */}
       <Card className="border border-slate-200">
-        <CardHeader className="bg-slate-50 border-b border-slate-200">
-          <CardTitle className="flex items-center gap-3 text-slate-800">
+        <CardHeader className="border-b border-slate-200" style={{ backgroundColor: '#ece6e1' }}>
+          {/* 👇 This is the line that has been changed to increase the text size. */}
+          <CardTitle className="flex items-center gap-3 text-slate-800 text-2xl font-bold">
             <div className="bg-orange-100 p-2 rounded-full">
-              <Clock className="h-5 w-5 text-orange-600" />
+              <Clock className="h-5 w-5 text-orange-800" />
             </div>
             Recent Attendance History
           </CardTitle>
