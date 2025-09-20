@@ -16,7 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ title, onDriverRegister, showDri
             <Bus className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font- text-[#99744a] hover-[#2f362c]">BusHive Authority Portal</h1>
+            <h1 className="text-xl font-bold text-[#99744a] hover-[#2f362c]">BusHive Authority Portal</h1>
             <p className="text-sm text-[#414a37]">{title}</p>
           </div>
         </div>
@@ -27,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({ title, onDriverRegister, showDri
           {showDriverRegister && (
             <Button
               onClick={onDriverRegister}
-              className="bg-[#414A37] text-[#DBC2A6] px-4 py-2 rounded-lg hover:bg-[#2F362C] transition-colors duration-200 flex items-center space-x-1"
+              className="bg-[#304159] text-slate-200 px-4 py-2 rounded-full hover:bg-[#2F362C] transition-colors duration-200 flex items-center space-x-1"
             >
               <UserPlus className="mr-2 h-4 w-4" />
               Driver Register 
