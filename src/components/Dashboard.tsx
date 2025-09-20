@@ -47,65 +47,81 @@ export const Dashboard: React.FC<DashboardProps> = ({
   return (
     <div className="space-y-6">
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="border border-slate-200">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Total Drivers</CardTitle>
-            <Users className="h-4 w-4 text-slate-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-800">{stats.total}</div>
-          </CardContent>
-        </Card>
-
-        <Card className="border border-slate-200">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">On Duty</CardTitle>
-            <UserCheck className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">{stats.onDuty}</div>
-            <Badge className="mt-1 bg-green-100 text-green-800 border-green-200">Active</Badge>
-          </CardContent>
-        </Card>
-
-        <Card className="border border-slate-200">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Off Duty</CardTitle>
-            <UserX className="h-4 w-4 text-slate-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-slate-600">{stats.offDuty}</div>
-            <Badge variant="secondary" className="mt-1">Inactive</Badge>
-          </CardContent>
-        </Card>
-
-        <Card className="border border-slate-200">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Verified</CardTitle>
-            <Bus className="h-4 w-4 text-orange-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-orange-600">{stats.verified}</div>
-            <Badge className="mt-1 bg-orange-100 text-orange-800 border-orange-200">Aadhaar</Badge>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Search Bar */}
-      <div className="bg-white p-6 rounded-lg border border-slate-200">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-semibold text-slate-800">Driver Management</h2>
-            <p className="text-sm text-slate-600">Manage driver attendance and view profiles</p>
-          </div>
-          <SearchBar
-            searchTerm={searchTerm}
-            onSearchChange={onSearchChange}
-            placeholder="Search by name or driver ID..."
-          />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Total Drivers */}
+      <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
+        <div className="p-6 flex justify-between items-center">
+          <h3 className="text-slate-600 text-sm font-semibold">Total Drivers</h3>
+          <Users className="h-5 w-5 text-slate-400" />
+        </div>
+        <div className="px-6 pb-4">
+          <p className="text-3xl font-bold text-slate-800">{stats.total}</p>
+        </div>
+        <div className="bg-[#ece6e1] text-center py-2">
+          <span className="text-slate-600 font-medium">Total</span>
         </div>
       </div>
+
+      {/* On Duty */}
+      <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
+        <div className="p-6 flex justify-between items-center">
+          <h3 className="text-slate-600 text-sm font-semibold">On Duty</h3>
+          <UserCheck className="h-5 w-5 text-green-600" />
+        </div>
+        <div className="px-6 pb-4">
+          <p className="text-3xl font-bold text-slate-800">{stats.onDuty}</p>
+        </div>
+        <div className="bg-[#ece6e1] text-center py-2">
+          <span className="text-green-600 font-semibold">Active</span>
+        </div>
+      </div>
+
+      {/* Off Duty */}
+      <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
+        <div className="p-6 flex justify-between items-center">
+          <h3 className="text-slate-600 text-sm font-semibold">Off Duty</h3>
+          <UserX className="h-5 w-5 text-slate-500" />
+        </div>
+        <div className="px-6 pb-4">
+          <p className="text-3xl font-bold text-slate-800">{stats.offDuty}</p>
+        </div>
+        <div className="bg-[#ece6e1] text-center py-2">
+          <span className="text-slate-600 font-semibold">Inactive</span>
+        </div>
+      </div>
+
+      {/* Verified */}
+      <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
+        <div className="p-6 flex justify-between items-center">
+          <h3 className="text-slate-600 text-sm font-semibold">Verified</h3>
+          <Bus className="h-5 w-5 text-orange-600" />
+        </div>
+        <div className="px-6 pb-4">
+          <p className="text-3xl font-bold text-slate-800">{stats.verified}</p>
+        </div>
+        <div className="bg-[#ece6e1] text-center py-2">
+          <span className="text-orange-600 font-semibold">Verified</span>
+        </div>
+      </div>
+    </div>
+      {/* Search Bar */}
+     <div className="bg-[#ece6e1] p-6 rounded-lg border border-slate-200">
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h2 className="text-lg font-semibold text-slate-800">Driver Management</h2>
+      <p className="text-sm text-slate-600">Manage driver attendance and view profiles</p>
+    </div>
+    <div className="bg-white rounded-full shadow-sm w-80 sm:w-96">
+      <SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={onSearchChange}
+        placeholder="Search by name or driver ID..."
+      />
+    </div>
+  </div>
+</div>
+
+
 
       {/* Driver Table */}
       <DriverTable
