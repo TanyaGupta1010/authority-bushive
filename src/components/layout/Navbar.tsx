@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import bushivelogo from './bushivelogo.jpg';
+// ...existing code...
+import bushivelogo from './bushivelogo.png';
 import { UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DriverRegistrationModal } from '@/components/driver-register/DriverRegistrationModal';
