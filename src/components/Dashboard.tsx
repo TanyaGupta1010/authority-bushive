@@ -57,8 +57,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <div className="px-6 pb-4">
           <p className="text-3xl font-bold text-slate-800">{stats.total}</p>
         </div>
-        <div className="bg-[#ece6e1] text-center py-2">
-          <span className="text-slate-600 font-medium">Total</span>
+        <div className="bg-[#304159] text-center py-2">
+          <span className="text-slate-200 font-semibold">Total</span>
         </div>
       </div>
 
@@ -66,13 +66,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
       <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
         <div className="p-6 flex justify-between items-center">
           <h3 className="text-slate-600 text-sm font-semibold">On Duty</h3>
-          <UserCheck className="h-5 w-5 text-green-600" />
+          <UserCheck className="h-5 w-5 text-green-800" />
         </div>
         <div className="px-6 pb-4">
           <p className="text-3xl font-bold text-slate-800">{stats.onDuty}</p>
         </div>
-        <div className="bg-[#ece6e1] text-center py-2">
-          <span className="text-green-600 font-semibold">Active</span>
+        <div className="bg-[#304159] text-center py-2">
+          <span className="text-slate-200 font-semibold">Active</span>
+
         </div>
       </div>
 
@@ -85,8 +86,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <div className="px-6 pb-4">
           <p className="text-3xl font-bold text-slate-800">{stats.offDuty}</p>
         </div>
-        <div className="bg-[#ece6e1] text-center py-2">
-          <span className="text-slate-600 font-semibold">Inactive</span>
+        <div className="bg-[#304159] text-center py-2">
+          <span className="text-slate-200 font-semibold">Inactive</span>
         </div>
       </div>
 
@@ -94,13 +95,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
       <div className="bg-white shadow-md rounded-t-2xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-200">
         <div className="p-6 flex justify-between items-center">
           <h3 className="text-slate-600 text-sm font-semibold">Verified</h3>
-          <Bus className="h-5 w-5 text-orange-600" />
+          <Bus className="h-5 w-5 text-[#D2884C]" />
         </div>
         <div className="px-6 pb-4">
           <p className="text-3xl font-bold text-slate-800">{stats.verified}</p>
         </div>
-        <div className="bg-[#ece6e1] text-center py-2">
-          <span className="text-orange-600 font-semibold">Verified</span>
+        <div className="bg-[#304159] text-center py-2">
+          <span className="text-slate-200 font-semibold">Verified</span>
+
         </div>
       </div>
     </div>

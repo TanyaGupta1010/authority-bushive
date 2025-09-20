@@ -1,3 +1,4 @@
+import React from 'react';
 import { Clock, AlarmClockOff as ClockOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,27 +22,26 @@ export const DriverTable: React.FC<DriverTableProps> = ({
   return (
     <Card className="border border-slate-200">
       <CardHeader className="bg-slate-50 border-b border-slate-200">
-        <CardTitle className="text-slate-800">Driver Management</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <Table>
-            <TableHeader className="bg-[#414A37]">
+            <TableHeader className="bg-[#304159]">
               <TableRow className="border-slate-600">
-                <TableHead className="text-[#DBC2A6] font-semibold">Driver Name</TableHead>
-                <TableHead className="text-[#DBC2A6] font-semibold">Driver ID</TableHead>
-                <TableHead className="text-[#DBC2A6] font-semibold">Bus Number</TableHead>
-                <TableHead className="text-[#DBC2A6] font-semibold">Status</TableHead>
-                <TableHead className="text-[#DBC2A6] font-semibold">Actions</TableHead>
+                <TableHead className="text-slate-200 font-semibold text-lg">Driver Name</TableHead>
+                <TableHead className="text-slate-200 font-semibold text-lg">Driver ID</TableHead>
+                <TableHead className="text-slate-200 font-semibold text-lg">Bus Number</TableHead>
+                <TableHead className="text-slate-200 font-semibold text-lg">Status</TableHead>
+                <TableHead className="text-slate-200 font-semibold text-lg">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {drivers.map((driver) => (
-                <TableRow key={driver.id} className="border-slate-200 hover:bg-slate-50">
+                <TableRow key={driver.id} className="border-slate-200">
                   <TableCell className="font-medium">
                     <button
                       onClick={() => onDriverClick(driver.id)}
-                      className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                      className="text-black font-medium bg-transparent transition-transform duration-200 transform hover:scale-110"
                     >
                       {driver.name}
                     </button>
@@ -54,7 +54,7 @@ export const DriverTable: React.FC<DriverTableProps> = ({
                       className={
                         driver.currentStatus === 'On Duty'
                           ? 'bg-green-100 text-green-800 border-green-200'
-                          : 'bg-slate-100 text-slate-800 border-slate-200'
+                          : 'bg-red-100 text-red-800 border-red-200'
                       }
                     >
                       {driver.currentStatus}
@@ -77,7 +77,7 @@ export const DriverTable: React.FC<DriverTableProps> = ({
                         variant="outline"
                         onClick={() => onClockOut(driver.id)}
                         disabled={driver.currentStatus === 'Off Duty'}
-                        className="bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="bg-red-50 border-red-200 text-red-700 hover:bg-red-100 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <ClockOff className="mr-1 h-3 w-3" />
                         Clock Out
