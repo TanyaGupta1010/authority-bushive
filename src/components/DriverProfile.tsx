@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Driver, AttendanceRecord } from '../types';
-import Footer from './layout/footer'; // ✅ Add footer import
+import Footer from './layout/footer';
 
 interface DriverProfileProps {
   driver: Driver;
@@ -25,7 +25,7 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
       weekday: 'short',
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -163,18 +163,10 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({
                 <TableBody>
                   {attendanceRecords.map((record) => (
                     <TableRow key={record.id} className="border-slate-200">
-                      <TableCell className="font-medium text-slate-700">
-                        {formatDate(record.date)}
-                      </TableCell>
-                      <TableCell className="text-slate-600">
-                        {record.clockInTime || '-'}
-                      </TableCell>
-                      <TableCell className="text-slate-600">
-                        {record.clockOutTime || '-'}
-                      </TableCell>
-                      <TableCell className="text-slate-600">
-                        {record.totalHours ? `${record.totalHours}h` : '-'}
-                      </TableCell>
+                      <TableCell className="font-medium text-slate-700">{formatDate(record.date)}</TableCell>
+                      <TableCell className="text-slate-600">{record.clockInTime || '-'}</TableCell>
+                      <TableCell className="text-slate-600">{record.clockOutTime || '-'}</TableCell>
+                      <TableCell className="text-slate-600">{record.totalHours ? `${record.totalHours}h` : '-'}</TableCell>
                       <TableCell>{getStatusBadge(record.status)}</TableCell>
                     </TableRow>
                   ))}

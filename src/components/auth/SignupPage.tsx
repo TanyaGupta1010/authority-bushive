@@ -40,15 +40,39 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onSwitchToLogi
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:5002/api/person/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          govtID: formData.govId,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.msg || 'Signup failed');
+        setIsLoading(false);
+        return;
+      }
+
+      alert('Signup successful! You can now login.');
       onSignup(formData.name, formData.govId);
+    } catch (err) {
+      console.error(err);
+      alert('Server error. Try again later.');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {

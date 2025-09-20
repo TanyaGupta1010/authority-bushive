@@ -19,19 +19,40 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      onLogin(formData.name, formData.govId);
-      setIsLoading(false);
-    }, 1000);
-  };
+    try {
+      const response = await fetch('http://localhost:5002/api/person/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          govtID: formData.govId,
+          password: formData.password,
+        }),
+      });
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.msg || 'Login failed');
+        setIsLoading(false);
+        return;
+      }
+
+      alert('Login successful!');
+      onLogin(data.person.name, formData.govId);
+    } catch (err) {
+      console.error(err);
+      alert('Server error. Try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,12 +62,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
           <div className="p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#304159]">
             <User className="h-8 w-8 text-[#ece6e1]" />
           </div>
-          <CardTitle className="text-2xl font-bold text-gray-800">
-            Authority Login
-          </CardTitle>
-          <p className="text-sm text-gray-600">
-            Access the BusHive Authority Portal
-          </p>
+          <CardTitle className="text-2xl font-bold text-gray-800">Authority Login</CardTitle>
+          <p className="text-sm text-gray-600">Access the BusHive Authority Portal</p>
         </CardHeader>
 
         <CardContent className="p-6">
@@ -108,11 +125,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
               </div>
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#ece6e1] hover:bg-[#ece6e1]/90 text-[#304159] py-2.5 font-medium"
+              className="w-full bg-[#ece6e1] hover:bg-[#ece6e1]/90 text-[#304159] py-2.5 font-medium flex items-center justify-center"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
