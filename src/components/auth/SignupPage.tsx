@@ -46,7 +46,7 @@ export const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onSwitchToLogi
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5002/api/person/signup', {
+      const response = await fetch('http://localhost:5000/api/person/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
