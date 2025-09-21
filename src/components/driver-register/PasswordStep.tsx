@@ -6,11 +6,12 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface PasswordStepProps {
-  onNext: () => void;
+  driverId: string;
+  onNext: (password: string) => void;
   onBack: () => void;
 }
 
-export const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) => {
+export const PasswordStep: React.FC<PasswordStepProps> = ({ driverId, onNext, onBack }) => {
   const [formData, setFormData] = useState({ password: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -25,7 +26,9 @@ export const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) =>
   };
 
   const handleNext = () => {
-    if (validateForm()) onNext();
+    if (validateForm()) {
+      onNext(formData.password); // pass the password to parent
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -59,7 +62,11 @@ export const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) =>
               required
               className={`border-slate-300 focus:border-orange-500 focus:ring-orange-500 ${errors.password ? 'border-red-500' : ''}`}
             />
-            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700">
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700"
+            >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
@@ -79,7 +86,11 @@ export const PasswordStep: React.FC<PasswordStepProps> = ({ onNext, onBack }) =>
               required
               className={`border-slate-300 focus:border-orange-500 focus:ring-orange-500 ${errors.confirmPassword ? 'border-red-500' : ''}`}
             />
-            <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700">
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700"
+            >
               {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>

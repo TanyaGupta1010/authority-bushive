@@ -5,7 +5,7 @@ import { LoginPage } from './components/auth/LoginPage';
 import { SignupPage } from './components/auth/SignupPage';
 import { Dashboard } from './components/Dashboard';
 import { DriverProfile } from './components/DriverProfile';
-import { DriverRegisterFlow } from './components/driver-register/DriverRegisterFlow';
+import DriverRegisterFlow from './components/driver-register/DriverRegisterFlow';
 import { mockDrivers, mockAttendanceRecords } from './data/mockData';
 import { Driver, AttendanceRecord, AppState } from './types';
 import { Toaster } from '@/components/ui/sonner';
@@ -175,13 +175,13 @@ function App() {
           onSwitchToLogin={handleSwitchToLogin}
         />
       )}
-
       {appState.currentPage === 'driver-register' && (
         <DriverRegisterFlow
           onComplete={handleDriverRegisterComplete}
           onCancel={handleDriverRegisterCancel}
         />
       )}
+
 
       {appState.isAuthenticated && (
         <main className="p-6 bg-slate-50 min-h-screen">

@@ -4,15 +4,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 
 interface SuccessStepProps {
-  driverId: string;
   driverName: string;
+  driverId?: string;  // optional real ID
+  tempId: string;     // temp ID to display
   onComplete: () => void;
 }
 
-export const SuccessStep: React.FC<SuccessStepProps> = ({ driverId, driverName, onComplete }) => {
-  const handleCopyDriverId = () => {
-    navigator.clipboard.writeText(driverId);
-    toast.success('Driver ID copied to clipboard!');
+export const SuccessStep: React.FC<SuccessStepProps> = ({ driverName, tempId, onComplete }) => {
+  const handleCopyTempId = () => {
+    navigator.clipboard.writeText(tempId);
+    toast.success('Temporary ID copied to clipboard!');
   };
 
   return (
@@ -27,6 +28,7 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ driverId, driverName, 
           <div className="bg-[#304159] h-2 rounded-full w-full"></div>
         </div>
       </CardHeader>
+
       <CardContent className="p-6 space-y-6 text-center">
         <div className="bg-green-50 p-4 rounded-lg border border-green-200">
           <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-3" />
@@ -35,14 +37,14 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ driverId, driverName, 
         </div>
 
         <div className="bg-slate-50 p-4 rounded-lg border border-slate-200">
-          <p className="text-sm text-slate-600 mb-2">Your unique Driver ID:</p>
+          <p className="text-sm text-slate-600 mb-2">Your temporary Driver ID:</p>
           <div className="flex items-center justify-center space-x-2">
-            <span className="font-mono text-2xl font-bold text-slate-800 bg-white px-4 py-2 rounded border">{driverId}</span>
-            <Button type="button" variant="outline" size="sm" onClick={handleCopyDriverId} className="border-slate-300 hover:bg-slate-50">
+            <span className="font-mono text-2xl font-bold text-slate-800 bg-white px-4 py-2 rounded border">{tempId}</span>
+            <Button type="button" variant="outline" size="sm" onClick={handleCopyTempId} className="border-slate-300 hover:bg-slate-50">
               <Copy className="h-4 w-4" />
             </Button>
           </div>
-          <p className="text-xs text-slate-500 mt-2">Please save this ID - you'll need it for login</p>
+          <p className="text-xs text-slate-500 mt-2">Please save this ID — you'll need it for login</p>
         </div>
 
         <Button type="button" onClick={onComplete} className="w-full bg-[#304159] hover:bg-[#304159]/90 text-white py-3 font-medium">
