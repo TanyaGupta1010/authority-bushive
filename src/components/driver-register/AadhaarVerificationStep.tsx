@@ -9,14 +9,15 @@ interface AadhaarVerificationStepProps {
   aadhaarNumber: string;
 }
 
-export const AadhaarVerificationStep: React.FC<AadhaarVerificationStepProps> = ({ 
-  onNext, 
-  onBack, 
-  aadhaarNumber 
+export const AadhaarVerificationStep: React.FC<AadhaarVerificationStepProps> = ({
+  onNext,
+  onBack,
+  aadhaarNumber
 }) => {
   const [isVerifying, setIsVerifying] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
 
+  // Simulate verification process
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVerifying(false);
@@ -28,6 +29,7 @@ export const AadhaarVerificationStep: React.FC<AadhaarVerificationStepProps> = (
 
   const handleContinue = () => onNext({});
 
+  // Mask Aadhaar number except last 4 digits
   const maskedAadhaar = aadhaarNumber.replace(/(\d{4})(\d{4})(\d{4})/, 'XXXX XXXX $3');
 
   return (
@@ -36,14 +38,13 @@ export const AadhaarVerificationStep: React.FC<AadhaarVerificationStepProps> = (
         <div className="bg-[#304159] p-3 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
           <Bus className="h-8 w-8 text-white" />
         </div>
-        <CardTitle className="text-2xl font-bold text-slate-800">
-          Aadhaar Verification
-        </CardTitle>
+        <CardTitle className="text-2xl font-bold text-slate-800">Aadhaar Verification</CardTitle>
         <p className="text-sm text-slate-600">Step 2 of 4: Identity Verification</p>
         <div className="w-full bg-slate-200 rounded-full h-2 mt-4">
           <div className="bg-[#304159] h-2 rounded-full w-2/4"></div>
         </div>
       </CardHeader>
+
       <CardContent className="p-6 text-center space-y-6">
         <div className="bg-slate-50 p-4 rounded-lg">
           <p className="text-sm text-slate-600 mb-2">Verifying Aadhaar Number:</p>
@@ -67,11 +68,21 @@ export const AadhaarVerificationStep: React.FC<AadhaarVerificationStepProps> = (
         )}
 
         <div className="flex space-x-3">
-          <Button type="button" variant="outline" onClick={onBack} className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onBack}
+            className="flex-1 border-slate-300 text-slate-700 hover:bg-slate-50"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-          <Button type="button" onClick={handleContinue} disabled={!isVerified} className="flex-1 bg-[#304159] hover:bg-[#304159]/90 text-white disabled:opacity-50">
+          <Button
+            type="button"
+            onClick={handleContinue}
+            disabled={!isVerified}
+            className="flex-1 bg-[#304159] hover:bg-[#304159]/90 text-white disabled:opacity-50"
+          >
             Continue
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

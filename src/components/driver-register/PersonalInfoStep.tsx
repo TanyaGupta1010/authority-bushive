@@ -7,20 +7,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { RegistrationData } from '../../types';
 
 interface PersonalInfoStepProps {
-  onNext: (data: Partial<RegistrationData>) => void;
+  initialData: Omit<RegistrationData, 'password'>;
+  onNext: (data: Omit<RegistrationData, 'password'>) => void;
   onCancel: () => void;
-  initialData: RegistrationData;
 }
 
-export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ onNext, onCancel, initialData }) => {
-  const [formData, setFormData] = useState({
-    fullName: initialData.fullName,
-    phoneNumber: initialData.phoneNumber,
-    aadhaarNumber: initialData.aadhaarNumber,
-  });
+export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ initialData, onNext, onCancel }) => {
+  const [formData, setFormData] = useState<Omit<RegistrationData, 'password'>>(initialData);
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: keyof Omit<RegistrationData, 'password'>, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    if (!formData.fullName || !formData.phoneNumber || !formData.aadhaarNumber || !formData.busNumber) {
+      return alert('All fields are required');
+    }
+    onNext(formData);
   };
 
   return (
@@ -109,9 +112,27 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ onNext, onCa
               </div>
             </div>
 
+            {/* Bus Number */}
+            <div>
+              <Label htmlFor="busNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                Bus Number
+              </Label>
+              <div className="relative">
+                <Input
+                  id="busNumber"
+                  type="text"
+                  value={formData.busNumber}
+                  onChange={(e) => handleInputChange('busNumber', e.target.value)}
+                  placeholder="Bus Number"
+                  required
+                  className="w-full pl-4 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#99744a] focus:border-transparent transition-all duration-200 text-sm"
+                />
+              </div>
+            </div>
+
             <Button
-              type="button" // ✅ Important to prevent reload
-              onClick={() => onNext(formData)}
+              type="button"
+              onClick={handleSubmit}
               className="w-full bg-[#ece6e1] text-[#304159] py-3 rounded-xl hover:bg-[#ece6e1]/90 transition-colors duration-200 font-semibold text-lg flex items-center justify-center"
             >
               Continue

@@ -35,6 +35,6 @@ export interface RegistrationData {
   fullName: string;
   phoneNumber: string;
   aadhaarNumber: string;
-  password: string;
-  driverId?: string;
+  busNumber: string;
+  password?: string; // optional because it's set later
 }
