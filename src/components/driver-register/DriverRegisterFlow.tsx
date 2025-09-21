@@ -1,14 +1,13 @@
-// src/components/driver-register/DriverRegisterFlow.tsx
+// DriverRegisterFlow.tsx
 import React, { useState } from 'react';
 import { PersonalInfoStep } from './PersonalInfoStep';
 import { AadhaarVerificationStep } from './AadhaarVerificationStep';
 import { PasswordStep } from './PasswordStep';
 import { SuccessStep } from './SuccessStep';
-import { RegistrationData } from '../../types';
-import axios from 'axios';
+import { RegistrationData, Driver } from '../../types';
 
 interface DriverRegisterFlowProps {
-  onComplete: () => void;
+  onComplete: (driver: Driver) => void;
   onCancel: () => void;
 }
 
@@ -22,45 +21,46 @@ const DriverRegisterFlow: React.FC<DriverRegisterFlowProps> = ({ onComplete, onC
     password: '',
   });
 
-  const [driverId, setDriverId] = useState<string>(''); // for PasswordStep
-  const [tempId, setTempId] = useState<string>('');     // for SuccessStep
+  const [newDriver, setNewDriver] = useState<Driver | null>(null);
+  const [tempId, setTempId] = useState<string>('');
 
-  // Step 1: Submit personal info
-  const handleNextPersonalInfo = async (data: Partial<RegistrationData>) => {
-    try {
-      const response = await axios.post('http://localhost:5002/api/drivers/signup', {
-        name: data.fullName,
-        phoneNumber: data.phoneNumber,
-        aadhaarNumber: data.aadhaarNumber,
-        busNumber: data.busNumber,
-      });
-
-      setRegistrationData(prev => ({ ...prev, ...data }));
-      setDriverId(response.data.driverId); 
-      setTempId(response.data.tempId || 'TEMP' + Math.floor(1000 + Math.random() * 9000));
-      setStep(2);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to register driver. Please try again.');
-    }
+  // Step 1: Personal Info
+  const handleNextPersonalInfo = (data: Partial<RegistrationData>) => {
+    setRegistrationData(prev => ({ ...prev, ...data }));
+    setStep(2);
   };
 
-  // Step 2: Aadhaar verification
+  // Step 2: Aadhaar Verification
   const handleNextAadhaar = () => setStep(3);
 
-  // Step 3: Set password
-  const handleNextPassword = async (password: string) => {
-    try {
-      await axios.post('http://localhost:5002/api/drivers/set-password', {
-        _id: driverId,
-        password,
-      });
-      setRegistrationData(prev => ({ ...prev, password }));
-      setStep(4);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to set password. Please try again.');
-    }
+  // Step 3: Set Password
+  const handleNextPassword = (password: string) => {
+    const updatedData = { ...registrationData, password };
+    setRegistrationData(updatedData);
+
+    const internalId = 'ID' + Math.floor(1000 + Math.random() * 9000);
+    const displayDriverId = 'DRV' + Math.floor(1000 + Math.random() * 9000);
+    const tempIdGenerated = 'TEMP' + Math.floor(1000 + Math.random() * 9000);
+    setTempId(tempIdGenerated);
+
+    const driver: Driver = {
+      id: internalId,
+      driverId: displayDriverId,
+      name: updatedData.fullName || 'Unknown',
+      phoneNumber: updatedData.phoneNumber || 'N/A',
+      aadhaarVerified: true,
+      assignedBusNumber: updatedData.busNumber || 'N/A',
+      assignedRoute: 'Not Assigned',
+      currentStatus: 'Off Duty',
+    };
+
+    setNewDriver(driver);
+    setStep(4); // show success step
+  };
+
+  // Step 4: Success → actually complete registration
+  const handleFinish = () => {
+    if (newDriver) onComplete(newDriver);
   };
 
   return (
@@ -72,28 +72,25 @@ const DriverRegisterFlow: React.FC<DriverRegisterFlowProps> = ({ onComplete, onC
           initialData={registrationData}
         />
       )}
-
       {step === 2 && (
         <AadhaarVerificationStep
-          aadhaarNumber={registrationData.aadhaarNumber}
+          aadhaarNumber={registrationData.aadhaarNumber || ''}
           onNext={handleNextAadhaar}
           onBack={() => setStep(1)}
         />
       )}
-
-      {step === 3 && driverId && (
+      {step === 3 && (
         <PasswordStep
-          driverId={driverId}
+          driverId={tempId || 'TEMP'}
           onNext={handleNextPassword}
           onBack={() => setStep(2)}
         />
       )}
-
-      {step === 4 && tempId && (
+      {step === 4 && newDriver && (
         <SuccessStep
           tempId={tempId}
-          driverName={registrationData.fullName}
-          onComplete={onComplete}
+          driverName={newDriver.name}
+          onComplete={handleFinish} // call onComplete only when user clicks button
         />
       )}
     </div>

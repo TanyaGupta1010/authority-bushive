@@ -1,9 +1,10 @@
+// src/components/DriverTable.tsx
 import React from 'react';
 import { Clock, AlarmClockOff as ClockOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Driver } from '../types';
 
 interface DriverTableProps {
@@ -20,8 +21,9 @@ export const DriverTable: React.FC<DriverTableProps> = ({
   onClockOut,
 }) => {
   return (
-    <Card className="border border-slate-200">
+    <Card className="border border-slate-200 mt-4">
       <CardHeader className="bg-slate-50 border-b border-slate-200">
+        <h2 className="text-lg font-semibold text-slate-700">Driver List</h2>
       </CardHeader>
       <CardContent className="p-0">
         <div className="overflow-x-auto">
@@ -37,11 +39,11 @@ export const DriverTable: React.FC<DriverTableProps> = ({
             </TableHeader>
             <TableBody>
               {drivers.map((driver) => (
-                <TableRow key={driver.id} className="border-slate-200">
+                <TableRow key={driver.id} className="border-slate-200 hover:bg-slate-50 transition-colors">
                   <TableCell className="font-medium">
                     <button
                       onClick={() => onDriverClick(driver.id)}
-                      className="text-black font-medium bg-transparent transition-transform duration-200 transform hover:scale-110"
+                      className="text-black font-medium bg-transparent transition-transform duration-200 transform hover:scale-105"
                     >
                       {driver.name}
                     </button>
