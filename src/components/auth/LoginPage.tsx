@@ -28,7 +28,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onSwitchToSignup 
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5002/api/person/login', {
+      const response = await fetch('http://localhost:5000/api/person/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

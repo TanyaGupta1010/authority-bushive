@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bushivelogo from './bushivelogo.png'; // Ensure the logo image is in the same directory
+import bushivelogo from 'https://res.cloudinary.com/dx0r0pbgb/image/upload/v1758447983/bushivelogo_1_tnvoyd.png'; // Ensure the logo image is in the same directory
 import { UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DriverRegistrationModal } from '@/components/driver-register/DriverRegistrationModal';
