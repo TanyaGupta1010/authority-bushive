@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bushivelogo from 'https://res.cloudinary.com/dx0r0pbgb/image/upload/v1758447983/bushivelogo_1_tnvoyd.png'; // Ensure the logo image is in the same directory
+// import bushivelogo from 'https://res.cloudinary.com/dx0r0pbgb/image/upload/v1758447983/bushivelogo_1_tnvoyd.png'; // Ensure the logo image is in the same directory
 import { UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DriverRegistrationModal } from '@/components/driver-register/DriverRegistrationModal';
@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center space-x-3">
           {/* Logo Image */}
           <img 
-            src={bushivelogo}
+            src="https://res.cloudinary.com/dx0r0pbgb/image/upload/v1758447983/bushivelogo_1_tnvoyd.png"
             alt="BusHive Logo" 
             className="h-10 w-10 object-contain"
           />
