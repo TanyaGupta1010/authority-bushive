@@ -8,7 +8,7 @@ import { DriverProfile } from './components/DriverProfile';
 import DriverRegisterFlow from './components/driver-register/DriverRegisterFlow';
 import { mockDrivers, mockAttendanceRecords } from './data/mockData';
 import { Driver, AttendanceRecord, AppState } from './types';
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from './components/ui/sonner';
 import { toast } from 'sonner';
 import './App.css';
 
